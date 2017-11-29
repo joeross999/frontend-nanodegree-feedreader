@@ -111,12 +111,12 @@ $(function() {
     }); 
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
-        var feed, feed2;
+        var feed1, feed2;
         beforeEach(function(done) {
             loadFeed(1, function(){
-                feed1 = $('.feed');
-                loadFeed(1, function(){
-                    feed2 = $('.feed');
+                feed1 = $('.feed').find('.entry')[0].innerText;
+                loadFeed(2, function(){
+                    feed2 = $('.feed').find('.entry')[0].innerText;
                     done();
                 })
             });
@@ -126,7 +126,7 @@ $(function() {
         * Remember, loadFeed() is asynchronous.
         */
         it('should load new elements to the page', function(done){
-            expect(feed1.find('.entry')[0].innerText).toBe(feed2.find('.entry')[0].innerText);
+            expect(feed1).not.toBe(feed2);
             done();
         });
     });
