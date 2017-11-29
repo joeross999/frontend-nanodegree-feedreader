@@ -111,11 +111,14 @@ $(function() {
     }); 
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
-        var feed = $('.feed');
-        var firstElement = feed.find('.entry')[0];
+        var feed, feed2;
         beforeEach(function(done) {
             loadFeed(1, function(){
-                done();
+                feed1 = $('.feed');
+                loadFeed(1, function(){
+                    feed2 = $('.feed');
+                    done();
+                })
             });
         });
         /* TODO: Write a test that ensures when a new feed is loaded
@@ -123,7 +126,7 @@ $(function() {
         * Remember, loadFeed() is asynchronous.
         */
         it('should load new elements to the page', function(done){
-            expect(feed.find('.entry')[0]).not.toBe(firstElement);
+            expect(feed1.find('.entry')[0].innerText).toBe(feed2.find('.entry')[0].innerText);
             done();
         });
     });
